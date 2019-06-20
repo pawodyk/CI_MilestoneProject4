@@ -1,5 +1,6 @@
-db.sqlite3
+*.sqlite3
 *.pyc
 .~c9
 __pycache__
 env.py
+instructions.md
