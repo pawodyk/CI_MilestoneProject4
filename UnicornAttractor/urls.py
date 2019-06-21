@@ -16,9 +16,14 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from home.views import homepage, aboutpage
+from issue_tracker import urls as urls_tracker
+from user_authentication import urls as urls_user
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', homepage, name='index'),
     url(r'^about/$', aboutpage, name='about'),
+    url(r'^tracker/', include(urls_tracker)),
+    url(r'^user/', include(urls_user))
 ]
