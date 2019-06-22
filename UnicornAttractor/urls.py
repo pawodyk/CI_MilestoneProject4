@@ -25,5 +25,5 @@ urlpatterns = [
     url(r'^$', homepage, name='index'),
     url(r'^about/$', aboutpage, name='about'),
     url(r'^tracker/', include(urls_tracker)),
-    url(r'^user/', include(urls_user))
+    url(r'^accounts/', include(urls_user))
 ]
