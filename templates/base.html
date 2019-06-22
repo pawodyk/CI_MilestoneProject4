@@ -18,19 +18,34 @@
 </head>
 
 <body>
-    <nav class="navbar sticky-top navbar-dark bg-dark">
-        <a class="navbar-brand" href="#"><img src="{% static 'img/logo.png'%}" width="64" height="64" alt="Unicorn Logo"></a>
-        <ul class="nav">
-            <li class="nav-item"><a class="nav-link" href="{% url 'index'%}">Home</a></li>
-            
-            {% if user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'logout'%}">Logout</a></li>
-            
-            {% else %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'registration' %}">Sign up</a></li>
-            {%endif%}
-        </ul>
+
+    <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="{% static 'img/logo.png'%}" width="64" height="64" alt="Unicorn Logo"></a>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#id_navbar" aria-controls="id_navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse" id="id_navbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'index'%}">Home</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown pl-sm-3 mr-auto">
+                        <a class="nav-link dropdown-toggle" href="#" id="id_account_menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello {{request.user.username}}!</a>
+                        <div class="dropdown-menu" aria-labelledby="id_account_menu">
+                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="{% url 'logout'%}">Logout</a>
+                        </div>
+                    </li>
+
+                    {% else %}
+                    <li class="nav-item pl-sm-3 mr-auto"><a class="nav-link btn btn-outline-success text-success px-4" href="{% url 'login' %}">Sign in</a></li>
+                    {%endif%}
+                </ul>
+            </div>
+        </div>
     </nav>
 
     {% if messages %}
@@ -40,14 +55,19 @@
         {% endfor %}
     </div>
 
-    {% endif %} 
-    
+    {% endif %}
+
     <!--main page content block-->
     {% block content %} {% endblock %}
 
     <footer id="main-footer" class="text-center text-muted bg-light py-4 mt-5">
         <p>Website made by Pawel Wodyk for Code&nbsp;Institute's Milestone Project.</p>
     </footer>
+
+    <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/myScripts.js' %}"></script>
+
 </body>
 
 </html>
