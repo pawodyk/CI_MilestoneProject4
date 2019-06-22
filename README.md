@@ -23,4 +23,6 @@
 
 ### Guides / Instructions / Code Samples
 
+* [Code Institute Module: Django Authentication](https://github.com/Code-Institute-Solutions/proposed_django_authentication)
+    - User Authentication and Custom Password Reset
 

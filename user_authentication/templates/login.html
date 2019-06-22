@@ -10,6 +10,10 @@
     {{ login_form }}
     
     <button type="submit">Login</button>
+    <p><a href="{% url 'password_reset' %}">Forgoten Password?</a></p>
 </form>
+
+
+<h2>If you dont have account create accout <a href="{% url 'registration' %}">here</a></h2>
 
 {% endblock %}
