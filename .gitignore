@@ -4,3 +4,5 @@
 __pycache__
 env.py
 instructions.md
+.coverage
+htmlcov/
