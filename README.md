@@ -26,3 +26,5 @@
 * [Code Institute Module: Django Authentication](https://github.com/Code-Institute-Solutions/proposed_django_authentication)
     - User Authentication and Custom Password Reset
 
+* [Code Institute Module: Finding and Purchasing Products](https://github.com/Code-Institute-Solutions/PuttingItAllTogether-Ecommerce/tree/master/02-FindingAndPurchasingProducts/08-stripe_javascript)
+    - Checkout app and stripe configuration

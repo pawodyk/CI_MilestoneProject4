@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+
+<!--Page Title-->
+{% block title %} | New Ticket {% endblock %}
+
+<!--Block content-->
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    {% if tt == "B" %}
+    <button class="btn btn-success" type="submit">Submit Ticket</button>
+    {% else %}
+    <button class="btn btn-success" type="submit">Pay</button>
+    {% endif %}
+    
+</form>
+
+
+{% endblock %}
