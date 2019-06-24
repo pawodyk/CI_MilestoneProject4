@@ -18,7 +18,7 @@ class Ticket(models.Model):
     
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=1000)
-    upvotes = models.IntegerField(default=0)
+    upvotes = models.IntegerField(default=1)
     contibutions = models.DecimalField(default=0, max_digits=8, decimal_places=2)
     ticket_type = models.CharField(max_length=1, choices=TICKET_TYPES)
     status = models.CharField(max_length=1, default="1", choices=TICKET_STATUS)

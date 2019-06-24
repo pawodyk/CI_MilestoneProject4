@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import MakePaymentForm, OrderForm
-from .models import OrderLineItem
 from django.conf import settings
 from django.utils import timezone
-from products.models import Product
 import stripe
+
+from .forms import MakePaymentForm, OrderForm
+from .models import Order
+from issue_tracker.models import Ticket 
 
 
 # Create your views here.
@@ -22,23 +23,19 @@ def checkout(request):
         if order_form.is_valid() and payment_form.is_valid():
             order = order_form.save(commit=False)
             order.date = timezone.now()
+            
+            ticket_id = request.session.get('ticket_id', None)
+            ticket = get_object_or_404(Ticket, pk=ticket_id)
+            ticket.contibutions += order.amount
+            
+            order.ticket = ticket
+            
+            ticket.save()
             order.save()
             
-            cart = request.session.get('cart', {})
-            total = 0
-            for item_id, quantity in cart.items():
-                product = get_object_or_404(Product, pk=item_id)
-                total += quantity * product.price
-                order_line_item = OrderLineItem(
-                    order = order, 
-                    product = product, 
-                    quantity = quantity
-                    )
-                order_line_item.save()
-                
             try:
                 customer = stripe.Charge.create(
-                    amount = int(total * 100),
+                    amount = int(order.amount * 100),
                     currency = "EUR",
                     description = request.user.email,
                     card = payment_form.cleaned_data['stripe_id'],
@@ -48,8 +45,8 @@ def checkout(request):
                 
             if customer.paid:
                 messages.error(request, "You have successfully paid")
-                request.session['cart'] = {}
-                return redirect(reverse('products'))
+                request.session['ticket_id'] = {}
+                return redirect(reverse('tracker'))
             else:
                 messages.error(request, "Unable to take payment")
         else:

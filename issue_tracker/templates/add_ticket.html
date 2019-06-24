@@ -1,4 +1,5 @@
 {% extends 'base.html'%}
+{% load bootstrap_tags %}
 
 <!--Page Title-->
 {% block title %} | New Ticket {% endblock %}
@@ -7,8 +8,8 @@
 {% block content %}
 <form method="POST">
     {% csrf_token %}
-    {{form.as_p}}
-    {% if tt == "B" %}
+    {{ form | as_bootstrap }}
+    {% if ticket_type == "B" %}
     <button class="btn btn-success" type="submit">Submit Ticket</button>
     {% else %}
     <button class="btn btn-success" type="submit">Pay</button>

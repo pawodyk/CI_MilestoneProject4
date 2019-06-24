@@ -27,7 +27,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{feature.name}}</h5>
                   <p class="card-text">{{feature.description}}</p>
-                  <a href="#" class="btn btn-primary">Support</a>
+                  <a href="{% url 'upvote_ticket' ticket_id=feature.id %}" class="btn btn-primary">Support</a>
                 </div>
               </div>
             </div>
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="card-footer text-center">
-          <a href="{% url 'add_ticket' tt='F' %}" class="btn btn-primary">Request new</a>
+          <a href="{% url 'add_ticket' ticket_type='F' %}" class="btn btn-primary">Request new</a>
         </div>
       </div>
     </div>
@@ -55,7 +55,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{bug.name}}</h5>
                   <p class="card-text">{{bug.description}}</p>
-                  <a href="" class="btn btn-primary">Report</a>
+                  <a href="{% url 'upvote_ticket' ticket_id=bug.id %}" class="btn btn-primary">Report</a>
                 </div>
               </div>
             </div>
@@ -66,7 +66,7 @@
           </div>
         </div>
         <div class="card-footer text-center">
-          <a href="{% url 'add_ticket' tt='B' %}" class="btn btn-primary">Report new</a>
+          <a href="{% url 'add_ticket' ticket_type='B' %}" class="btn btn-primary">Report new</a>
         </div>
       </div>
     </div>

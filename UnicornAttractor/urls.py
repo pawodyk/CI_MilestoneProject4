@@ -18,12 +18,13 @@ from django.contrib import admin
 from home.views import homepage, aboutpage
 from issue_tracker import urls as urls_tracker
 from user_authentication import urls as urls_user
-
+from checkout import urls as urls_checkout
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', homepage, name='index'),
     url(r'^about/$', aboutpage, name='about'),
     url(r'^tracker/', include(urls_tracker)),
-    url(r'^accounts/', include(urls_user))
+    url(r'^accounts/', include(urls_user)),
+    url(r'^checkout/', include(urls_checkout)),
 ]
