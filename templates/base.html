@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    
+
     <!--Navbar-->
     <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-sm">
         <div class="container">
@@ -53,15 +53,14 @@
     </nav>
 
     {% if messages %}
-    <div class="">
+    <div>
         {% for message in messages %}
-            {% if message.error %}
-            <div class="alert alert-danger mb-2" role="alert">{{ message }}</div>
-            {% elif message.success %}
-            <div class="alert alert-success mb-2" role="alert">{{ message }}</div>
-            {% else %}
-            <div class="alert alert-info mb-2" role="alert">{{ message }}</div>
-            {% endif %}
+        <div class="alert alert-info mb-2 alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         {% endfor %}
     </div>
     {% endif %}
@@ -72,7 +71,7 @@
             {% block content %} {% endblock %}
         </div>
     </main>
-    
+
     <!--Footer-->
     <footer id="main-footer" class="text-center text-muted bg-light py-4 mt-5">
         <p>Website made by Pawel Wodyk for Code&nbsp;Institute's Milestone Project.</p>
@@ -80,9 +79,9 @@
 
     <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    
+
     <script type="text/javascript" src="{% static 'js/myScripts.js' %}"></script>
-    
+
     {% block custom_scripts %} {% endblock %}
 
 </body>
