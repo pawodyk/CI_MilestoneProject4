@@ -5,7 +5,7 @@ from django.conf import settings
 from django.utils import timezone
 import stripe
 
-from .forms import MakePaymentForm, OrderForm
+from .forms import MakePaymentForm, OrderForm, AmountInput
 from .models import Order
 from issue_tracker.models import Ticket 
 
@@ -19,18 +19,19 @@ def checkout(request):
     if request.method=="POST":
         order_form = OrderForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
-        amount_input =  request.POST.amount
+        amount_input =  AmountInput(request.POST)
         
-        print(request.POST, amount_input)
-        
-        if order_form.is_valid() and payment_form.is_valid():
+        if order_form.is_valid() and payment_form.is_valid() and amount_input.is_valid:
+            
+            amount = amount_input.cleaned_data['amount']
+            
             order = order_form.save(commit=False)
             order.date = timezone.now()
-            order.amount = amount_input
+            order.amount = amount
             
             ticket_id = request.session.get('ticket_id', None)
             ticket = get_object_or_404(Ticket, pk=ticket_id)
-            ticket.contibutions += amount_input
+            ticket.contibutions += amount
             
             order.ticket = ticket
             
@@ -59,7 +60,8 @@ def checkout(request):
     else:
         payment_form = MakePaymentForm()
         order_form = OrderForm()
+        amount_input = AmountInput()
         
-    return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'publishable': settings.STRIPE_PUBLISHABLE})
+    return render(request, "checkout.html", {'order_form': order_form, 'payment_form': payment_form, 'amount_input': amount_input, 'publishable': settings.STRIPE_PUBLISHABLE})
                 
             
