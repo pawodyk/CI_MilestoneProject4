@@ -21,7 +21,14 @@ def checkout(request):
         payment_form = MakePaymentForm(request.POST)
         amount_input =  AmountInput(request.POST)
         
-        if order_form.is_valid() and payment_form.is_valid() and amount_input.is_valid:
+        try:
+            ticket_id = request.session.get('ticket_id', None)
+            ticket = get_object_or_404(Ticket, pk=ticket_id)
+        except:
+            messages.error(request, "We could not detect any ticket, please select the ticket you wish to pay for and complete the payment again")
+            return redirect(reverse('tracker'))
+        
+        if order_form.is_valid() and payment_form.is_valid() and amount_input.is_valid():
             
             amount = amount_input.cleaned_data['amount']
             
@@ -29,8 +36,6 @@ def checkout(request):
             order.date = timezone.now()
             order.amount = amount
             
-            ticket_id = request.session.get('ticket_id', None)
-            ticket = get_object_or_404(Ticket, pk=ticket_id)
             ticket.contibutions += amount
             
             order.ticket = ticket
