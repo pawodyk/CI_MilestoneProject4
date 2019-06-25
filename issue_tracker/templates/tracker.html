@@ -25,6 +25,7 @@
                 <h5 class="card-title">{{feature.name}}</h5>
                 <p class="card-text">{{feature.description}}</p>
                 <a href="{% url 'upvote_ticket' ticket_id=feature.id %}" class="btn btn-primary">Support</a>
+                <a href="{% url 'view_ticket' ticket_id=feature.id %}" class="btn btn-primary">View</a>
               </div>
             </div>
           </div>
@@ -53,6 +54,7 @@
                 <h5 class="card-title">{{bug.name}}</h5>
                 <p class="card-text">{{bug.description}}</p>
                 <a href="{% url 'upvote_ticket' ticket_id=bug.id %}" class="btn btn-primary">Report</a>
+                <a href="{% url 'view_ticket' ticket_id=bug.id %}" class="btn btn-primary">View</a>
               </div>
             </div>
           </div>

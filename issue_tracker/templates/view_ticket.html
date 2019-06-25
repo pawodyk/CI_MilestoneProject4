@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+
+<!--Page Title-->
+{% block title %} | Ticket {% endblock %}
+
+<!--Block content-->
+{% block content %}
+<div class="row py-2">
+    <div class="col-md-8 offset-md-2">
+
+        <h2>{%if ticket.ticket_type == "F"%} Requested Feature: {%elif ticket.ticket_type == "B"%} Reported Bug: {% endif %}"{{ ticket.name }}"</h2>
+        <div class="p-3 border border-secondary">
+            <p>{{ ticket.description }}</p>
+        </div>
+
+        <p>Total contributions: {{ticket.contibutions}}</p>
+        <p></p>
+        <p></p>
+        <p></p>
+
+        {% if is_owner %}
+        <a href="{% url 'edit_ticket' ticket_id=ticket.id %}" class="btn btn-primary">Edit</a> {% endif %}
+
+        <a href="{% url 'upvote_ticket' ticket_id=ticket.id %}" class="btn btn-primary">Contribute</a>
+        <a href="{% url 'tracker' %}" class="btn btn-primary">Back</a>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -5,22 +5,18 @@
 
 <!--Block content-->
 {% block content %}
-
 <div class="row">
     <div class="col-md-6 offset-md-3">
-
         <form method="POST">
-            {% csrf_token %}
-
+            {% csrf_token %} 
+            
             <!--display form-->
             {{ form | as_bootstrap }}
 
-            <button class="btn btn-success" type="submit">{% if ticket_type == "B" %} Submit Ticket {% else %} Pay {% endif %}</button>
+            <button class="btn btn-success" type="submit">Submit Changes</button>
         </form>
-
     </div>
 </div>
-
 
 
 
