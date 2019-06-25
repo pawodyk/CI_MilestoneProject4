@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'issue_tracker',
     'user_authentication',
     'checkout',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
