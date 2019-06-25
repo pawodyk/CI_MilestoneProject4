@@ -19,14 +19,18 @@ def checkout(request):
     if request.method=="POST":
         order_form = OrderForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
+        amount_input =  request.POST.amount
+        
+        print(request.POST, amount_input)
         
         if order_form.is_valid() and payment_form.is_valid():
             order = order_form.save(commit=False)
             order.date = timezone.now()
+            order.amount = amount_input
             
             ticket_id = request.session.get('ticket_id', None)
             ticket = get_object_or_404(Ticket, pk=ticket_id)
-            ticket.contibutions += order.amount
+            ticket.contibutions += amount_input
             
             order.ticket = ticket
             
@@ -44,7 +48,7 @@ def checkout(request):
                 messages.error(request, "Your card was declined!")
                 
             if customer.paid:
-                messages.error(request, "You have successfully paid")
+                messages.success(request, "You have successfully paid")
                 request.session['ticket_id'] = {}
                 return redirect(reverse('tracker'))
             else:

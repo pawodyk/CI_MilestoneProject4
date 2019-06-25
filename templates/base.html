@@ -53,17 +53,24 @@
     </nav>
 
     {% if messages %}
-    <div class="alert alert-info my-1" role="alert">
+    <div class="">
         {% for message in messages %}
-        <div class="mb-2">{{ message }}</div>
+            {% if message.error %}
+            <div class="alert alert-danger mb-2" role="alert">{{ message }}</div>
+            {% elif message.success %}
+            <div class="alert alert-success mb-2" role="alert">{{ message }}</div>
+            {% else %}
+            <div class="alert alert-info mb-2" role="alert">{{ message }}</div>
+            {% endif %}
         {% endfor %}
     </div>
-
     {% endif %}
 
     <!--main page content block-->
     <main>
-        {% block content %} {% endblock %}
+        <div class="container">
+            {% block content %} {% endblock %}
+        </div>
     </main>
     
     <!--Footer-->
