@@ -1,5 +1,10 @@
 {% extends "base.html" %} {% load static from staticfiles %} {% load bootstrap_tags %}
 
+<!--Page Title-->
+{% block title %}
+| Payments
+{% endblock %}
+
 <!--main block-->
 {% block content%}
 <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}">
