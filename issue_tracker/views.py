@@ -1,12 +1,23 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Ticket
+from .models import Ticket, TICKET_STATUS
 from .forms import NewTicketForm
 
 def view_tracker(request):
-    features_list = Ticket.objects.filter(ticket_type="F")
-    bugs_list = Ticket.objects.filter(ticket_type="B")
+    features_list = [ f for f in Ticket.objects.filter(ticket_type="F").values('name', 'id', 'status', 'progress')]
+    bugs_list = [b for b in Ticket.objects.filter(ticket_type="B").values('name', 'id', 'status', 'progress')]
+    
+    ts = dict(TICKET_STATUS)
+    
+    for feature in features_list:
+        status = ts[feature['status']]
+        feature['status'] = status
+        
+    for bug in bugs_list:
+        status = ts[bug['status']]
+        bug['status'] = status
+    
     return render(request, 'tracker.html', {"features":features_list, "bugs":bugs_list})
 
 @login_required
@@ -42,7 +53,7 @@ def upvote_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, pk=ticket_id)
     if ticket.ticket_type == "B":
         if request.user in ticket.upvoted_by.all():
-            messages.info(request, "You already upvoted this ticket")
+            messages.info(request, "You already Reported this bug")
             return redirect(reverse('tracker'))
             
     ticket.upvoted_by.add(request.user)

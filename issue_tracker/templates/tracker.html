@@ -11,21 +11,29 @@
 
 <div class="row">
 
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-header">
+  <div class="col-12 col-lg-6 pb-3">
+    <div class="card bg-dark">
+      <div class="card-header text-light">
         <h2>Features</h2>
       </div>
       <div class="card-body">
         <div class="row">
           {% for feature in features%}
-          <div class="col-12">
+          <div class="col-12 mb-2">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">{{feature.name}}</h5>
-                <p class="card-text">{{feature.description}}</p>
-                <a href="{% url 'upvote_ticket' ticket_id=feature.id %}" class="btn btn-primary">Support</a>
-                <a href="{% url 'view_ticket' ticket_id=feature.id %}" class="btn btn-primary">View</a>
+                <h5 class="card-title">{{feature.name}} <span class="badge badge-success float-sm-right">{{feature.status}}</span></h5>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped bg-info font-weight-bold" role="progressbar" style="width: {{feature.progress}}%;" aria-valuenow="{{feature.progress}}" aria-valuemin="0" aria-valuemax="100">
+                    {%if feature.progress > 0 %} {{feature.progress}} % {%endif%}
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer d-flex justify-content-center">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <a href="{% url 'upvote_ticket' ticket_id=feature.id %}" class="btn btn-primary py-2 mr-1">Contribute</a>
+                  <a href="{% url 'view_ticket' ticket_id=feature.id %}" class="btn btn-primary py-2">View</a>
+                </div>
               </div>
             </div>
           </div>
@@ -40,21 +48,29 @@
     </div>
   </div>
 
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-header">
+  <div class="col-12 col-lg-6 pb-3">
+    <div class="card bg-dark">
+      <div class="card-header text-light">
         <h2>Bugs</h2>
       </div>
       <div class="card-body">
         <div class="row">
           {% for bug in bugs%}
-          <div class="col-12">
+          <div class="col-12 mb-2">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">{{bug.name}}</h5>
-                <p class="card-text">{{bug.description}}</p>
-                <a href="{% url 'upvote_ticket' ticket_id=bug.id %}" class="btn btn-primary">Report</a>
-                <a href="{% url 'view_ticket' ticket_id=bug.id %}" class="btn btn-primary">View</a>
+                <h5 class="card-title">{{bug.name}} <span class="badge badge-success float-sm-right">{{bug.status}}</span></h5>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped bg-info font-weight-bold" role="progressbar" style="width: {{bug.progress}}%;" aria-valuenow="{{bug.progress}}" aria-valuemin="0" aria-valuemax="100">
+                    {%if bug.progress > 0 %} {{bug.progress}} % {%endif%}
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer d-flex justify-content-center">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <a href="{% url 'upvote_ticket' ticket_id=bug.id %}" class="btn btn-primary py-2 mr-1">Report</a>
+                  <a href="{% url 'view_ticket' ticket_id=bug.id %}" class="btn btn-primary py-2">View</a>
+                </div>
               </div>
             </div>
           </div>

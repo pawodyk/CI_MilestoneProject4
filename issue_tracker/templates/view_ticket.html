@@ -5,24 +5,41 @@
 
 <!--Block content-->
 {% block content %}
-<div class="row py-2">
-    <div class="col-md-8 offset-md-2">
+<div class="row py-2 my-3">
+    <div class="col-lg-8 offset-lg-2 bg-dark p-3 text-light shadow ">
 
-        <h2>{%if ticket.ticket_type == "F"%} Requested Feature: {%elif ticket.ticket_type == "B"%} Reported Bug: {% endif %}"{{ ticket.name }}"</h2>
-        <div class="p-3 border border-secondary">
-            <p>{{ ticket.description }}</p>
+        <div class="row">
+            <div class="col-12">
+                <h2>{%if ticket.ticket_type == "F"%} Requested Feature: {%elif ticket.ticket_type == "B"%} Reported Bug: {% endif %}"{{ ticket.name }}"</h2>
+                <div class="p-4 mb-2 border border-secondary bg-light text-dark">
+                    <p class="m-0">{{ ticket.description }}</p>
+                </div>
+            </div>
         </div>
 
-        <p>Total contributions: {{ticket.contibutions}}</p>
-        <p></p>
-        <p></p>
-        <p></p>
 
-        {% if is_owner %}
-        <a href="{% url 'edit_ticket' ticket_id=ticket.id %}" class="btn btn-primary">Edit</a> {% endif %}
+        <div class="row">
+            <div class="col-6">
+                Total contributions: {{ticket.contibutions}}
+            </div>
+            <div class="col-6 text-right">
+                Current progress: {{ticket.progress}}%
+            </div>
 
-        <a href="{% url 'upvote_ticket' ticket_id=ticket.id %}" class="btn btn-primary">Contribute</a>
-        <a href="{% url 'tracker' %}" class="btn btn-primary">Back</a>
+
+            <div class="col-12 mt-3 d-flex justify-content-center">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    {% if is_owner %}
+                    <a href="{% url 'edit_ticket' ticket_id=ticket.id %}" class="btn btn-primary px-3 mr-1">Edit</a> {% endif %}
+
+
+                    <a href="{% url 'upvote_ticket' ticket_id=ticket.id %}" class="btn btn-primary px-3 mr-1">{% if ticket.ticket_type == 'F' %} Contribute {% else %} Report {%endif%}</a>
+                    <a href="{% url 'tracker' %}" class="btn btn-primary px-3">Back</a>
+                </div>
+            </div>
+        </div>
+
+
 
     </div>
 </div>

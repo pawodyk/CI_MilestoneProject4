@@ -22,6 +22,7 @@ class Ticket(models.Model):
     contibutions = models.DecimalField(default=0, max_digits=8, decimal_places=2)
     ticket_type = models.CharField(max_length=1, choices=TICKET_TYPES)
     status = models.CharField(max_length=1, default="2", choices=TICKET_STATUS)
+    progress = models.IntegerField(default=0)
 
     created_date = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, related_name="author")
@@ -29,4 +30,4 @@ class Ticket(models.Model):
     
     
     def __str__(self):
-        return "{0} : {1}".format(self.ticket_type, str(self.id) ) 
+        return "{0}{1} : {2}".format(self.ticket_type, str(self.id), self.name ) 
