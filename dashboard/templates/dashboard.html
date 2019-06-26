@@ -1,13 +1,101 @@
-{% extends 'base.html'%}
+{% extends 'base.html'%} {% load static from staticfiles %}
 
 <!--Page Title-->
-{% block title %}
-| Dashboard
-{% endblock %}
+{% block title %} | Dashboard {% endblock %}
 
 <!--Block content-->
 {% block content %}
 
 <h1>Dashboard</h1>
+<div class="row">
+    <div class="col-md-4">
+        <h3>Bugs to Features ratio</h3>
+        <div id='ratio_chart'></div>
+    </div>
+    <div class="col-md-4">
+        <h3>Tickets per status</h3>
+        <div id='ticketstatus_chart'></div>
+    </div>
+    <div class="col-md-4">
+        <h3>Sum of contributions per day </h3>
+        <div id='contrib_chart'></div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
+
+<!--Custom scripts used to display the dashboard-->
+{% block custom_scripts %}
+
+<script type="text/javascript" src="{% static 'js/d3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/crossfilter.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/dc.min.js' %}"></script>
+
+<script>
+    var tickets = {{ tickets | safe }};
+    var orders = {{ orders | safe }};
+
+    // console.log(somedata);
+
+    // var graph_1 = document.getElementById("id_chart1");
+    // var graph_2 = document.getElementById("id_chart2");
+    // var graph_3 = document.getElementById("id_chart3");
+
+    // for (var i = 0; i < somedata.length; i++){
+    //     graph_1.insertAdjacentHTML('afterbegin', `<p>${somedata[i].name} : ${somedata[i].ticket_type}</p>`);
+    //     console.log(somedata[i])
+    // }
+
+
+
+    var ndx = crossfilter(tickets);
+
+    var all = ndx.groupAll();
+
+    var tt_dim = ndx.dimension(dc.pluck('ticket_type'));
+    var tt_group = tt_dim.group().reduceCount();
+
+    var s_dim = ndx.dimension(dc.pluck('status'));
+    var s_group = s_dim.group().reduceCount();
+
+
+    var ndx_orders = crossfilter(orders)
+
+    var date_dim = ndx_orders.dimension(dc.pluck('Date'));
+    var date_group = date_dim.group().reduceSum(dc.pluck('Amount'));
+
+
+    dc.pieChart('#ratio_chart')
+        .radius(120)
+        .dimension(tt_dim)
+        .group(tt_group)
+        .label(function(d) {
+            var label = (d.key == "F") ? "Features" : "Bugs";
+            label += `: ${d.value}`;
+            return label;
+        })
+
+
+    dc.barChart('#ticketstatus_chart')
+        .dimension(s_dim)
+        .group(s_group)
+        .x(d3.scaleOrdinal())
+        .xUnits(dc.units.ordinal)
+        .elasticY(true)
+        .yAxis().ticks(4);
+
+
+    dc.lineChart('#contrib_chart')
+        .dimension(date_dim)
+        .group(date_group)
+        .x(d3.scaleOrdinal())
+        .xUnits(dc.units.ordinal);
+        
+        
+    dc.renderAll();
+</script>
 
 {% endblock %}
