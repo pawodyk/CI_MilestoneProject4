@@ -1,0 +1,18 @@
+.chart {
+    height:300px;
+}
+
+.chart-heading{
+    display: block;
+    height: 50px;
+    font-size: 25px;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.chart>div {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    
+}

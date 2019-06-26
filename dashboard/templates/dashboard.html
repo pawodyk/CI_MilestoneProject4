@@ -5,19 +5,29 @@
 
 <!--Block content-->
 {% block content %}
-
-<h1>Dashboard</h1>
 <div class="row">
-    <div class="col-md-4">
-        <h3>Bugs to Features ratio</h3>
-        <div id='ratio_chart'></div>
+    <div class="col-12">
+        <h1>Dashboard</h1>
     </div>
-    <div class="col-md-4">
-        <h3>Tickets per status</h3>
+    <div class="col-12">
+        <p>We want to be very transparent to our users, to help us with this task we designed this interactive dashboard. You can see for yourself how many tickets are currentlly active, how much bugs we have and how much generous contributions we revived from our users.</p>
+    </div>
+    
+    
+</div>
+
+
+<div class="row border border-dark rounded p-4">
+    <div class="col-md-6 col-lg-4 mb-3 chart">
+        <h3 class="chart-heading">Bugs to Features ratio</h3>
+        <div id='ratio_chart' class="px-4 pb-4"></div>
+    </div>
+    <div class="col-md-6 col-lg-4 mb-3 chart">
+        <h3 class="chart-heading">Tickets per status</h3>
         <div id='ticketstatus_chart'></div>
     </div>
-    <div class="col-md-4">
-        <h3>Sum of contributions per day </h3>
+    <div class="col-md-6 col-lg-4 mb-3 chart">
+        <h3 class="chart-heading">Contributions</h3>
         <div id='contrib_chart'></div>
     </div>
 </div>
@@ -69,7 +79,8 @@
 
 
     dc.pieChart('#ratio_chart')
-        .radius(120)
+        .width(200)
+        .height(200)
         .dimension(tt_dim)
         .group(tt_group)
         .label(function(d) {
@@ -80,6 +91,8 @@
 
 
     dc.barChart('#ticketstatus_chart')
+        .width(350)
+        .height(200)
         .dimension(s_dim)
         .group(s_group)
         .x(d3.scaleOrdinal())
@@ -89,6 +102,8 @@
 
 
     dc.lineChart('#contrib_chart')
+        .width(350)
+        .height(200)
         .dimension(date_dim)
         .group(date_group)
         .x(d3.scaleOrdinal())
