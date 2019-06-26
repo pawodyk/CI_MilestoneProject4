@@ -13,6 +13,8 @@ TICKET_STATUS = (
     ("2", "Submitted"),
     ("3", "On Hold"),
     ("5", "Abandoned"),
+    ("9", "Highest-paid"),
+    
 )
 
 class Ticket(models.Model):
@@ -30,4 +32,4 @@ class Ticket(models.Model):
     
     
     def __str__(self):
-        return "{0}{1} : {2}".format(self.ticket_type, str(self.id), self.name ) 
+        return "{0}{1} : {2} @ {3}".format(self.ticket_type, str(self.id), self.name, self.contibutions if self.ticket_type == "F" else self.upvoted_by.count() ) 

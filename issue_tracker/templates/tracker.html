@@ -1,13 +1,42 @@
 {% extends 'base.html'%}
 
 <!--Page Title-->
-{% block title %} | Issue Tracker {% endblock %}
+{% block title %} | Tracker {% endblock %}
 
 <!--Block content-->
 {% block content %}
 
 
 <h1>Issue Tracker</h1>
+
+{% if featured %}
+<div class="alert alert-success">
+  <h4 class="display-4 alert-heading">Featured ticket</h4>
+  <p class="lead">This ticket is currentlly our priority and will recive 50% of our time:</p>
+  <hr>
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{featured.name}} <span class="badge badge-success float-sm-right">{{featured.status}}</span></h5>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-info font-weight-bold" role="progressbar" style="width: {{featured.progress}}%;" aria-valuenow="{{featured.progress}}" aria-valuemin="0" aria-valuemax="100">
+              {%if featured.progress > 0 %} {{featured.progress}} % {%endif%}
+            </div>
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-center">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="{% url 'upvote_ticket' ticket_id=featured.id %}" class="btn btn-primary py-2 mr-1">Contribute</a>
+            <a href="{% url 'view_ticket' ticket_id=featured.id %}" class="btn btn-primary py-2">View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
 
 <div class="row">
 

@@ -7,10 +7,14 @@ from .forms import NewTicketForm
 def view_tracker(request):
     features_list = [ f for f in Ticket.objects.filter(ticket_type="F").values('name', 'id', 'status', 'progress')]
     bugs_list = [b for b in Ticket.objects.filter(ticket_type="B").values('name', 'id', 'status', 'progress')]
+    top_feature = {}
     
     ts = dict(TICKET_STATUS)
     
     for feature in features_list:
+        if feature['status'] == "9":
+            top_feature = feature
+        
         status = ts[feature['status']]
         feature['status'] = status
         
@@ -18,7 +22,7 @@ def view_tracker(request):
         status = ts[bug['status']]
         bug['status'] = status
     
-    return render(request, 'tracker.html', {"features":features_list, "bugs":bugs_list})
+    return render(request, 'tracker.html', {"features":features_list, "bugs":bugs_list, "featured": top_feature})
 
 @login_required
 def add_ticket(request, ticket_type):
@@ -74,6 +78,8 @@ def view_ticket(request, ticket_id):
     if ticket.created_by == request.user:
         is_owner = True
         
+    if ticket.ticket_type == "B":
+        ticket.contibutions = ticket.upvoted_by.count()
         
     return render(request, 'view_ticket.html', {"ticket": ticket, "is_owner": is_owner})
     

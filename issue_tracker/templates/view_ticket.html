@@ -20,7 +20,7 @@
 
         <div class="row">
             <div class="col-6">
-                Total contributions: {{ticket.contibutions}}
+                {% if ticket.ticket_type == "F" %}Total contributions{% else %}Upvotes{% endif %}: {{ticket.contibutions}}
             </div>
             <div class="col-6 text-right">
                 Current progress: {{ticket.progress}}%
