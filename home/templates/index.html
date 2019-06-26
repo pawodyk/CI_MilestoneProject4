@@ -1,13 +1,50 @@
 {% extends 'base.html'%}
-
-<!--Page Title-->
-{% block title %}
-| Home
-{% endblock %}
+{% load static from staticfiles %}
 
 <!--Block content-->
 {% block content %}
 
-<h1>Home</h1>
+<div class="jumbotron my-4">
+  <h1 class="display-4">Welcome to Unicorn&nbsp;Attractor Games</h1>
+  <p class="lead">We are a small indie development studio. We focus on interaction with players and we belive that the players should have say in shapeing of the games we make.</p>
+  <hr class="my-4">
+  <p>You can use the button bellow to play our games.</p>
+  <a class="btn btn-primary btn-lg" href="#" role="button">Play Now</a>
+</div>
+
+
+<div class="row bg-dark text-light pt-4 pb-5">
+
+  <div class="col-12">
+    <h2>Our Bussines Model</h2>
+    <div class="text-box">
+      <p>We are a small indie games studio that make a free to play games. Our bussiness model is simple. We develop the games and <strong>You</strong>, the player, play our games and report your findings.</p>
+      <p>If you think about something amazing that could be added to our game, you can send it to us with small donation. We review your ticket and work on implementing it to the game.</p>
+      <p>However since we have a finite amount of time and resources we need to carefully allocate it between development, implementation of new features and, of course, fixing the bugs.</p>
+      <p>We relay on the players like you to support us, but we don't want the whole donation process to be old and boring. So we decided to <em>gamify the experience</em> to make it more fun!</p>
+      <p>If your ticket recive the most contributions we <strong>guarantee</strong> to alocate <em>at least 50%</em> of our available time to <strong>develop your feature!!!</strong></p>
+      <div class="text-center mt-4">
+        <a href="{% url 'add_ticket' ticket_type='F' %}" class="btn btn-success btn-lg text-light">Request your feature <strong>now!</strong></a>
+      </div>
+    </div>
+    
+    <div class="text-center mt-4 mb-2">
+      <img src="{% static 'img/logo.png'%}" width="64" height="64" alt="Unicorn Logo">
+    </div>
+    
+    <h2>Reporting Bugs</h2>
+    <div class="text-box">
+      <p>We won't lie to you, there are some bugs in our games. They are still work in progress and we do not have dedicated team to test every aspect of our games. We are passionate about games and make our games for people like us. </p>
+      <p>That's why we rely on you to help us make Unicorn Attractor's games <em>great</em> and <em>bug free</em>!</p>
+      <p>Reporting the bug is, obviously, free of charge and you just need an account to report a bug to us.</p>
+      <p>We encourage you to view the already reported bus before you submit your ticket, and upvote the tickets that are already in progress.</p> 
+      <p>Once reported your ticket will be reviewed and you will be able to track the progress from 0% to 100% directlly on our website.</p>
+      <div class="text-center mt-4">
+        <a href="{% url 'tracker'%}" class="btn btn-success btn-lg text-light">View our Ticket Tracker</a>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 {% endblock %}
