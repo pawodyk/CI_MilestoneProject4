@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'checkout',
     'dashboard',
     'user_profile',
+    'games',
+    
 ]
 
 MIDDLEWARE = [

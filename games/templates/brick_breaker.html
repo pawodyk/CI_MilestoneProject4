@@ -1,0 +1,40 @@
+{% extends 'base.html'%} {% load static from staticfiles %}
+
+<!--Page Title-->
+{% block title %} | Brick Breaker {% endblock %}
+
+<!--custom Scripts and Styles-->
+{% block head_links %}
+
+<link rel="stylesheet" href="{% static 'game/TemplateData/UnityStylesheet.css' %}">
+<script src="{% static 'game/TemplateData/UnityProgress.js' %}"></script>
+<script src="{% static 'game/Build/UnityLoader.js' %}"></script>
+<script>
+    var unityInstance = UnityLoader.instantiate("unityContainer", "{% static 'game/Build/UAv0.1.json' %}", { onProgress: UnityProgress });
+</script>
+{% endblock %}
+
+<!--Block content-->
+{% block content %}
+<div class="row">
+    <h1>Our Games</h1>
+    <div class="col-12 bg-dark p-5 text-light rounded">
+        <h2 class="m-0 p-0">Brick Breaker</h2>
+        <div class="webgl-content">
+            <div class="bg-light" style="width: 800px; height: 600px; margin: 0 auto; overflow: none;">
+                <div id="unityContainer" style="width: 800px; height: 600px;"></div>
+            </div>
+            
+            <div class="footer">
+                <div class="webgl-logo"></div>
+                <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+                <div class="title">UnicornAttractorGame</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+<!--Custom scripts used to display the dashboard-->
+{% block custom_scripts %} {% endblock %}

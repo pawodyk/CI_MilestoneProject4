@@ -21,6 +21,7 @@ from user_authentication import urls as urls_user
 from user_profile import urls as urls_profile
 from checkout import urls as urls_checkout
 from dashboard import urls as urls_dashboard
+from games import urls as urls_games
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -31,4 +32,5 @@ urlpatterns = [
     url(r'^profile/', include(urls_profile)),
     url(r'^checkout/', include(urls_checkout)),
     url(r'^dashboard/', include(urls_dashboard)),
+    url(r'^games/', include(urls_games)),
 ]

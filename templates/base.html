@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="{% static 'css/dc.min.css' %}" type="text/css" />
     
     <link rel="stylesheet" href="{% static 'css/myStyles.css' %}" type="text/css" />
-
+    
+    {% block head_links %} {% endblock %}
 </head>
 
 <body>
@@ -34,6 +35,9 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link text-light" href="{% url 'index'%}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{% url 'game'%}">Games</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="{% url 'dashboard'%}">Dashboard</a>
