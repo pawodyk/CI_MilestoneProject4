@@ -5,8 +5,8 @@ from .models import Ticket, TICKET_STATUS
 from .forms import NewTicketForm
 
 def view_tracker(request):
-    features_list = [ f for f in Ticket.objects.filter(ticket_type="F").values('name', 'id', 'status', 'progress')]
-    bugs_list = [b for b in Ticket.objects.filter(ticket_type="B").values('name', 'id', 'status', 'progress')]
+    features_list = [ f for f in Ticket.objects.filter(ticket_type="F").order_by('status').values('name', 'id', 'status', 'progress')]
+    bugs_list = [b for b in Ticket.objects.filter(ticket_type="B").order_by('status').values('name', 'id', 'status', 'progress')]
     top_feature = {}
     
     ts = dict(TICKET_STATUS)
