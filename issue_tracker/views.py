@@ -12,7 +12,7 @@ def view_tracker(request):
     ts = dict(TICKET_STATUS)
     
     for feature in features_list:
-        if feature['status'] == "9":
+        if feature['status'] == "0":
             top_feature = feature
         
         status = ts[feature['status']]
