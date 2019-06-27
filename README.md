@@ -1,6 +1,6 @@
 # Milestone Project 4 - ***Unicorn Attractor Games***
 
-
+[![Build Status](https://travis-ci.org/pwodyk/CI_MilestoneProject4.svg?branch=master)](https://travis-ci.org/pwodyk/CI_MilestoneProject4)
 
 
 
