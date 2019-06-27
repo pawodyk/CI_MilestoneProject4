@@ -14,11 +14,7 @@ def display_dashboard(request):
         
         ticket['status'] = status
     
-    
-    
     o_data = Order.objects.all().values('date', 'amount')
     orders = [{"Date" : str(o['date']), "Amount": float(o['amount'])} for o in o_data]
-    
-    print(orders)
     
     return render(request, 'dashboard.html', {'tickets': tickets, 'orders': orders})
