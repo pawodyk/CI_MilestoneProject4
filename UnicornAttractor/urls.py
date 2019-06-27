@@ -15,18 +15,20 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from home.views import homepage, aboutpage
+from home.views import homepage
 from issue_tracker import urls as urls_tracker
 from user_authentication import urls as urls_user
+from user_profile import urls as urls_profile
 from checkout import urls as urls_checkout
 from dashboard import urls as urls_dashboard
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', homepage, name='index'),
-    url(r'^about/$', aboutpage, name='about'),
+    ## url(r'^about/$', aboutpage, name='about'),
     url(r'^tracker/', include(urls_tracker)),
     url(r'^accounts/', include(urls_user)),
+    url(r'^profile/', include(urls_profile)),
     url(r'^checkout/', include(urls_checkout)),
     url(r'^dashboard/', include(urls_dashboard)),
 ]

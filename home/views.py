@@ -5,5 +5,5 @@ from django.shortcuts import render
 def homepage(request):
     return render(request, 'index.html')
     
-def aboutpage(requrest):
-    return render(requrest, 'about.html')
+# def aboutpage(requrest):
+#     return render(requrest, 'about.html')

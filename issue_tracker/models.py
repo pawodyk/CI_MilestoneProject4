@@ -8,12 +8,13 @@ TICKET_TYPES = (
 )
     
 TICKET_STATUS = (
-    ("0", "Completed"),
-    ("1", "In Progress"),
-    ("2", "Submitted"),
-    ("3", "On Hold"),
+    ("0", "Highest-paid"),
+    ("1", "Completed"),
+    ("2", "In Progress"),
+    ("3", "Submitted"),
+    ("4", "On Hold"),
     ("5", "Abandoned"),
-    ("9", "Highest-paid"),
+    
     
 )
 
@@ -23,7 +24,7 @@ class Ticket(models.Model):
     description = models.CharField(max_length=1000)
     contibutions = models.DecimalField(default=0, max_digits=8, decimal_places=2)
     ticket_type = models.CharField(max_length=1, choices=TICKET_TYPES)
-    status = models.CharField(max_length=1, default="2", choices=TICKET_STATUS)
+    status = models.CharField(max_length=1, default="3", choices=TICKET_STATUS)
     progress = models.IntegerField(default=0)
 
     created_date = models.DateTimeField(auto_now_add=True)

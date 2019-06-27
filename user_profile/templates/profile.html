@@ -1,0 +1,65 @@
+{% extends 'base.html'%}
+
+<!--Block content-->
+{% block content %}
+
+<div class="row">
+  <div class="col-12 col-lg-8 offset-lg-2 pt-2 pb-3">
+    <h1>Welcome {{user.username}}</h1>
+    <p>This is your profile page, where you can view your tickets</p>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-12 col-lg-8 offset-lg-2 pb-3">
+    <div class="card bg-dark">
+      <div class="card-header text-light">
+        <h2>Your Tickets:</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          {% for ticket in tickets%}
+          <div class="col-12 mb-2">
+            <div class="card">
+              <div class="card-header d-flex flex-column">
+                <div class="clearfix">
+                  <span class="badge badge-primary float-left px-3 py-1">{{ticket.type_name}}</span>
+                  <span class="badge badge-success float-right px-3 py-1">{{ticket.status_name}}</span>
+                </div>
+                <h5 class="card-title text-center">{{ticket.name}} </h5>
+                <div class="progress mx-4">
+                  <div class="progress-bar progress-bar-striped bg-info font-weight-bold" role="progressbar" style="width: {{ticket.progress}}%;" aria-valuenow="{{ticket.progress}}" aria-valuemin="0" aria-valuemax="100">
+                    {%if ticket.progress > 0 %} {{ticket.progress}} % {%endif%}
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <p>{{ticket.description}}</p>
+
+              </div>
+              <div class="card-footer d-flex justify-content-center">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  {% if ticket.ticket_type == "F"%}
+                  <a href="{% url 'upvote_ticket' ticket_id=ticket.id %}" class="btn btn-primary py-2 mr-1">Contribute</a> {% endif %}
+                  <a href="{% url 'edit_ticket' ticket_id=ticket.id %}" class="btn btn-primary py-2 px-3">Edit</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="col-12 text-white text-center">You have not created any tickets yet!</div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="card-footer text-center">
+        <div class="btn-group w-75" role="group" aria-label="Basic example">
+          <a href="{% url 'add_ticket' ticket_type='F' %}" class="btn btn-primary mr-1 w-50">Request new Feature</a>
+          <a href="{% url 'add_ticket' ticket_type='F' %}" class="btn btn-primary w-50">Report new Bug</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

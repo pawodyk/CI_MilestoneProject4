@@ -41,11 +41,12 @@
                     <li class="nav-item">
                         <a class="nav-link text-light" href="{% url 'tracker'%}">Tickets</a>
                     </li>
+                    
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown pl-sm-3 mr-auto">
                         <a class="nav-link dropdown-toggle" href="#" id="id_account_menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello {{ user.username }}!</a>
                         <div class="dropdown-menu" aria-labelledby="id_account_menu">
-                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="{% url 'profile'%}">Profile</a>
                             <a class="dropdown-item" href="{% url 'logout'%}">Logout</a>
                         </div>
                     </li>

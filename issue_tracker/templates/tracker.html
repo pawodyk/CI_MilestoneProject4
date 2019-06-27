@@ -51,10 +51,10 @@
           <div class="col-12 mb-2">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">{{feature.name}} <span class="badge badge-success float-sm-right">{{feature.status}}</span></h5>
+                <h5 class="card-title">{{feature.name}} <span class="badge badge-success float-sm-right">{{ feature.status }}</span></h5>
                 <div class="progress">
                   <div class="progress-bar progress-bar-striped bg-info font-weight-bold" role="progressbar" style="width: {{feature.progress}}%;" aria-valuenow="{{feature.progress}}" aria-valuemin="0" aria-valuemax="100">
-                    {%if feature.progress > 0 %} {{feature.progress}} % {%endif%}
+                    {% if feature.progress > 0 %} {{ feature.progress }} % {% endif %}
                   </div>
                 </div>
               </div>
@@ -67,12 +67,12 @@
             </div>
           </div>
           {% empty %}
-          <div class="col-12">There are no new featueres requestsed at this time!</div>
+          <div class="col-12 text-white text-center">There are no new featueres requestsed at this time!</div>
           {% endfor %}
         </div>
       </div>
       <div class="card-footer text-center">
-        <a href="{% url 'add_ticket' ticket_type='F' %}" class="btn btn-primary">Request new</a>
+        <a href="{% url 'add_ticket' ticket_type='F' %}" class="btn btn-primary w-50">Request new Feature</a>
       </div>
     </div>
   </div>
@@ -84,14 +84,14 @@
       </div>
       <div class="card-body">
         <div class="row">
-          {% for bug in bugs%}
+          {% for bug in bugs %}
           <div class="col-12 mb-2">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">{{bug.name}} <span class="badge badge-success float-sm-right">{{bug.status}}</span></h5>
+                <h5 class="card-title">{{ bug.name }} <span class="badge badge-success float-sm-right">{{ bug.status }}</span></h5>
                 <div class="progress">
                   <div class="progress-bar progress-bar-striped bg-info font-weight-bold" role="progressbar" style="width: {{bug.progress}}%;" aria-valuenow="{{bug.progress}}" aria-valuemin="0" aria-valuemax="100">
-                    {%if bug.progress > 0 %} {{bug.progress}} % {%endif%}
+                    {% if bug.progress > 0 %} {{ bug.progress }} % {% endif %}
                   </div>
                 </div>
               </div>
@@ -105,12 +105,12 @@
           </div>
 
           {% empty %}
-          <div class="col-12">There are no Bugs at this time!</div>
+          <div class="col-12 text-white text-center">There are no Bugs at this time!</div>
           {% endfor %}
         </div>
       </div>
       <div class="card-footer text-center">
-        <a href="{% url 'add_ticket' ticket_type='B' %}" class="btn btn-primary">Report new</a>
+        <a href="{% url 'add_ticket' ticket_type='B' %}" class="btn btn-primary w-50">Report new Bug</a>
       </div>
     </div>
   </div>

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'user_authentication',
     'checkout',
     'dashboard',
+    'user_profile',
 ]
 
 MIDDLEWARE = [
