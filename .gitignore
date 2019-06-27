@@ -4,5 +4,4 @@
 __pycache__
 env.py
 instructions.md
-.coverage
-htmlcov/
+run_tests.sh
