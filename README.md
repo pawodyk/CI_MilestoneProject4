@@ -128,7 +128,7 @@ The Games page is optimized as well with bootstrap however the game has been com
 
 The testing was done via django TestCase class functionality and with the use of Python unittests
 
-The coverage was tested using python coverage package. Almost all apps had 100% coverage and overall coverage of the whole site was [95%](./htmlcov/index.html)
+The coverage was tested using python coverage package. Almost all apps had 100% coverage and overall coverage of the whole site was [95%](https://pwodyk.github.io/CI_MilestoneProject4_htmlcov/)
 
 During development I used:
 
@@ -141,7 +141,7 @@ to extract only the apps that I needed to test and to ensure the env.py file wit
 
 The final results
 
-Coverage results in html format
+[Coverage results in html format](https://pwodyk.github.io/CI_MilestoneProject4_htmlcov/)
 
 Test results and coverage report from console
 
