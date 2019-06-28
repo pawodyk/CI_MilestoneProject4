@@ -1,4 +1,4 @@
-{% extends 'base.html'%}
+{% extends 'base.html'%} {% load bootstrap_tags %}
 
 <!--Page Title-->
 {% block title %} | Registration {% endblock %}
@@ -6,13 +6,15 @@
 <!--Block content-->
 {% block content %}
 
-<h1>Registration</h1>
+<div class="row my-5">
+    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 bg-dark p-5 text-light rounded">
+        <h1>Registration</h1>
+        <form method="POST">
+            {% csrf_token %} {{ reg_form | as_bootstrap }}
 
-<form method="POST">
-    {% csrf_token %}
-    {{ reg_form.as_p }}
-    
-    <button type="submit">Login</button>
-</form>
+            <button class="btn btn-success mr-3" type="submit">Create Account</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

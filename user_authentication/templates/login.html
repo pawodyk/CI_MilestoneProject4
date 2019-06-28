@@ -1,22 +1,21 @@
-{% extends 'base.html'%}
+{% extends 'base.html'%} {% load bootstrap_tags %}
 
 <!--Page Title-->
 {% block title %} | Login {% endblock %}
 
 <!--Block content-->
 {% block content %}
+<div class="row my-5">
+    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 bg-dark p-5 text-light rounded">
+        <h1>Sign in</h1>
+        <form method="POST">
+            {% csrf_token %} {{ login_form | as_bootstrap }}
 
-<h1>Sign in</h1>
-
-<form method="POST">
-    {% csrf_token %}
-    {{ login_form }}
-    
-    <button type="submit">Login</button>
-    <p><a href="{% url 'password_reset' %}">Forgoten Password?</a></p>
-</form>
-
-
-<h2>If you dont have account create accout <a href="{% url 'registration' %}">here</a></h2>
+            <button class="btn btn-success mr-3" type="submit">Login</button>
+            <small><a class="text-decoration-none text-primary" href="{% url 'password_reset' %}">Forgoten Password?</a></small>
+            <p class="lead mt-3 mb-2" >If you dont have account create accout <a class="text-decoration-none text-primary" href="{% url 'registration' %}">here</a></p>
+        </form>
+    </div>
+</div>
 
 {% endblock %}
