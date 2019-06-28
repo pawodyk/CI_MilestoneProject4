@@ -28,3 +28,7 @@
 
 * [Code Institute Module: Finding and Purchasing Products](https://github.com/Code-Institute-Solutions/PuttingItAllTogether-Ecommerce/tree/master/02-FindingAndPurchasingProducts/08-stripe_javascript)
     - Checkout app and stripe configuration
+
+
+* https://stackoverflow.com/questions/11455756/django-how-to-test-if-message-is-sent#11457068
+   - Capture messages after redirect in tests
