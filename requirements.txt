@@ -1,4 +1,4 @@
-Django==1.11.23
+Django==1.11.28
 certifi==2019.6.16
 chardet==3.0.4
 coverage==4.5.3
